@@ -54,7 +54,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/50 z-10"></div>
         <img 
-          src="/assets/images/hero-bg.jpg" 
+          src="/assets/images/hero-bg.png" 
           alt="Architecture Background" 
           className="w-full h-full object-cover"
           onError={(e) => {
@@ -123,8 +123,8 @@ const Hero = () => {
             href="#featured-projects" 
             className="flex flex-col items-center text-white/70 hover:text-white transition-colors duration-300"
           >
-            <span className="text-sm mb-2">Discover More</span>
-            <div className="w-6 h-10 border border-white/50 rounded-full flex items-start justify-center p-1">
+            {/* <span className="text-sm mb-2">Discover More</span> */}
+            {/* <div className="w-6 h-10 border border-white/50 rounded-full flex items-start justify-center p-1">
               <motion.div 
                 className="w-1 h-2 bg-white rounded-full"
                 animate={{ 
@@ -137,7 +137,7 @@ const Hero = () => {
                   ease: "easeInOut",
                 }}
               />
-            </div>
+            </div> */}
           </a>
         </motion.div>
       </div>

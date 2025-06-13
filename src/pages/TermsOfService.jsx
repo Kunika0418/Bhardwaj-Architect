@@ -239,7 +239,7 @@ const TermsOfService = () => {
             </p>
             <p className="mb-8">
               <strong>Email:</strong> legal@bhardwajarchitect.com<br />
-              <strong>Phone:</strong> +91 98765 43210<br />
+              <strong>Phone:</strong> +91-8700683138<br />
               <strong>Address:</strong> 123 Architecture Avenue, Delhi, India
             </p>
             

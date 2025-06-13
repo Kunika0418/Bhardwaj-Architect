@@ -44,8 +44,13 @@ const Navbar = () => {
   const navbarClasses = `fixed w-full z-50 transition-all duration-300 ${
     isScrolled
       ? `${theme === 'dark' ? 'bg-bg shadow-lg' : 'bg-white/90 backdrop-blur-sm shadow-lg'}`
-      : `${theme === 'dark' ? 'bg-transparent' : 'bg-transparent'}`
+      : 'bg-gradient-to-b from-black/70 to-transparent'
   }`;
+
+  const getTextColor = () => {
+    if (!isScrolled) return 'text-white';
+    return theme === 'dark' ? 'text-white' : 'text-black';
+  };
 
   const navbarVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -78,6 +83,19 @@ const Navbar = () => {
     },
   };
 
+  const handleNavClick = (e) => {
+    const currentPath = window.location.pathname;
+    const targetPath = e.currentTarget.getAttribute('href');
+    
+    if (currentPath === targetPath) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <motion.nav
       className={navbarClasses}
@@ -87,8 +105,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto">
         <div className="flex justify-between items-center py-4 px-4 md:px-0">
-          <Link to="/" className="flex items-center">
-            <Logo />
+          <Link to="/" onClick={handleNavClick} className="flex items-center">
+            <Logo size="default" isScrolled={isScrolled} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -97,10 +115,11 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
+                onClick={handleNavClick}
                 className={`font-medium transition-all duration-300 hover:text-primary ${
                   location.pathname === item.path
                     ? 'text-primary'
-                    : 'text-text'
+                    : getTextColor()
                 }`}
               >
                 {item.name}
@@ -114,7 +133,7 @@ const Navbar = () => {
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-text hover:text-primary focus:outline-none"
+              className={`hover:text-primary focus:outline-none ${getTextColor()}`}
               aria-label="Toggle menu"
             >
               {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -125,7 +144,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       <motion.div
-        className={`fixed top-0 right-0 h-screen w-4/5 bg-bg-secondary md:hidden z-50 p-6 shadow-xl`}
+        className="fixed top-0 right-0 h-screen w-4/5 bg-bg-secondary md:hidden z-50 p-6 shadow-xl"
         initial="closed"
         animate={isOpen ? 'open' : 'closed'}
         variants={mobileMenuVariants}
@@ -144,6 +163,10 @@ const Navbar = () => {
             <Link
               key={item.name}
               to={item.path}
+              onClick={(e) => {
+                handleNavClick(e);
+                setIsOpen(false);
+              }}
               className={`font-medium text-lg transition-all duration-300 hover:text-primary ${
                 location.pathname === item.path
                   ? 'text-primary'

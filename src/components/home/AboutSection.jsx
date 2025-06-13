@@ -12,8 +12,8 @@ const AboutSection = () => {
   
   // Statistics counters
   const stats = [
-    { value: 15, label: 'Years of Experience' },
-    { value: 200, label: 'Projects Completed' },
+    { value: 9, label: 'Years of Experience' },
+    { value: 100, label: 'Projects Completed' },
     { value: 45, label: 'Team Members' },
     { value: 18, label: 'Design Awards' }
   ];
@@ -46,8 +46,23 @@ const AboutSection = () => {
   }, []);
   
   return (
-    <section className="section" data-scroll-section>
-      <div className="container mx-auto">
+    <section className="section relative min-h-[60vh]" data-scroll-section>
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <img 
+          src="/assets/images/backgrounds/about-bg.png"
+          alt="About Background"
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            console.error('Error loading image:', e);
+            e.target.parentElement.classList.add('bg-gradient-to-br', 'from-gray-900', 'to-gray-600');
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
             <SectionHeading
@@ -63,17 +78,14 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <p className="text-text-light">
-                {/* Founded in 2008, Bhardwaj Architect has established itself as a premier architectural firm specializing in innovative design solutions across residential, commercial, and public sectors. */}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi et sed consectetur eaque esse provident, repellendus voluptate illum est odio quod deserunt itaque. Possimus cum quos praesentium officia in reprehenderit.
+              <p className="text-white/90">
+                At Bhardwaj Architects, we don't just build structures — we craft experiences. What started as a small design studio with a big vision has grown into a trusted name in architecture, known for creativity, precision, and passion.
               </p>
-              <p className="text-text-light">
-                {/* Our philosophy centers on creating harmonious spaces that blend functionality, aesthetics, and sustainability. We believe that exceptional architecture should not only captivate the eye but also enhance the quality of life for those who interact with it. */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex at, quas sed odit ullam dignissimos temporibus dolores tenetur quibusdam perferendis fuga assumenda tempora sit nulla debitis recusandae distinctio maiores architecto.
+              <p className="text-white/90">
+                Our journey began with a simple idea: to design spaces that reflect the people who live and work in them. Over the years, we've brought that vision to life through residential, commercial, and urban projects — each one guided by thoughtful planning, timeless aesthetics, and functional innovation.
               </p>
-              <p className="text-text-light">
-                {/* With a team of passionate architects, designers, and planners, we bring a wealth of expertise and fresh perspectives to every project, ensuring results that exceed expectations. */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui laudantium rerum ipsa praesentium voluptatem beatae, molestiae sunt animi dolorum necessitatibus debitis fugiat. Optio, magnam officia!
+              <p className="text-white/90">
+                Rooted in architectural excellence and driven by a client-first approach, we blend modern design with practical solutions to create environments that inspire. Whether it's a cozy home or a bold commercial space, every project we take on is a new story waiting to be told — and we're here to help you tell yours.
               </p>
             </motion.div>
             
@@ -84,7 +96,7 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.3 }}
             >
-              <Button to="/about" variant="primary">
+              <Button to="/about" variant="primary" size="large">
                 Learn More About Us
               </Button>
             </motion.div>
@@ -97,22 +109,22 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <div className="relative aspect-[4/5] overflow-hidden">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
               <img 
                 src="/assets/images/about-image.jpg" 
                 alt="Bhardwaj Architect Team" 
-                className="w-full h-full object-cover rounded-lg shadow-lg"
+                className="w-full h-full object-cover rounded-lg shadow-xl"
                 onError={(e) => {
                   e.target.parentElement.classList.add('bg-gradient-to-br', 'from-gray-200', 'to-gray-400', 'dark:from-gray-800', 'dark:to-gray-900');
                   e.target.style.display = 'none';
                 }}
               />
-              <div className="absolute top-0 left-0 w-full h-full bg-primary opacity-10"></div>
+              <div className="absolute top-0 left-0 w-full h-full bg-black/20 rounded-lg"></div>
             </div>
             
             {/* Decorative elements */}
-            <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-primary opacity-70 z-[-1]"></div>
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 border-2 border-primary opacity-70 z-[-1]"></div>
+            <div className="absolute -top-4 -left-4 w-24 h-24 border-2 border-white opacity-20 z-[-1]"></div>
+            <div className="absolute -bottom-4 -right-4 w-32 h-32 border-2 border-white opacity-20 z-[-1] rounded-full"></div>
           </motion.div>
         </div>
         

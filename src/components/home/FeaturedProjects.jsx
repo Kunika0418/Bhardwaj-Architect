@@ -48,7 +48,7 @@ const FeaturedProjects = () => {
   };
 
   return (
-    <section id="featured-projects" className="section" data-scroll-section>
+    <section id="featured-projects" className="section section-bg projects-bg" data-scroll-section>
       <div className="container mx-auto">
         <SectionHeading
           title="Featured Projects"

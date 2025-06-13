@@ -20,190 +20,148 @@ import {
   FaChevronDown,
   FaCheckCircle,
 } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
   const processRef = useRef(null);
+  const location = useLocation();
   
+  // Scroll to section if hash is present in URL
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100); // Small delay to ensure content is rendered
+      }
+    }
+  }, [location]);
+
   // Service categories with their details
   const services = [
     {
       id: 'architectural-design',
-      icon: <FaPencilRuler className="text-5xl text-primary" />,
       title: 'Architectural Design',
-      shortDescription: 'Innovative design solutions tailored to your vision and requirements.',
-      description: 'Our architectural design services focus on creating spaces that are not just aesthetically pleasing but also functional and sustainable. We work closely with clients to understand their needs, vision, and constraints to deliver exceptional design solutions. From initial concept sketches to detailed construction drawings, our comprehensive approach ensures that every aspect of the project is carefully considered.',
-      process: [
-        'Initial consultation and requirement gathering',
-        'Site analysis and feasibility studies',
-        'Concept design and visualization',
-        'Design development and refinement',
-        'Construction documentation',
-        'Permit acquisition assistance',
-        'Construction administration'
-      ],
-      projects: [
-        'Modern Villa, Mumbai',
-        'Cultural Center, Jaipur',
-        'Beach House, Goa'
-      ],
-      image: '/assets/images/service-architectural.jpg'
+      icon: <FaHome className="text-4xl text-primary" />,
+      description: 'Creating innovative and functional architectural designs that meet your vision and requirements.',
+      image: '/assets/images/services/architectural-design.jpg',
+      features: [
+        'Custom residential designs',
+        'Commercial building designs',
+        'Renovation and remodeling',
+        'Space planning and optimization',
+        'Sustainable design integration'
+      ]
     },
     {
       id: 'interior-design',
-      icon: <FaHome className="text-5xl text-primary" />,
       title: 'Interior Design',
-      shortDescription: 'Transforming interior spaces with thoughtful design that balances aesthetics, functionality, and your personal style.',
-      description: 'Our interior design services transform spaces into environments that reflect your personality, lifestyle, and functional needs. We combine colors, textures, lighting, and materials to create harmonious interiors that enhance the overall architectural design. Whether its a residential, commercial, or institutional space, our team ensures that every interior element contributes to a cohesive and inspiring environment.',
-      process: [
-        'Space planning and layout design',
-        'Material and finish selection',
-        'Custom furniture design',
-        'Lighting design',
-        'Color scheme development',
-        'Accessory and art curation',
-        'Implementation and styling'
-      ],
-      projects: [
-        'Modern Villa Interior, Mumbai',
-        'Corporate Office, Delhi',
-        'Luxury Apartment, Bangalore'
-      ],
-      image: '/assets/images/service-interior.jpg'
+      icon: <FaPalette className="text-4xl text-primary" />,
+      description: 'Transforming spaces into beautiful, functional environments that reflect your style and needs.',
+      image: '/assets/images/services/interior-design.jpg',
+      features: [
+        'Residential interior design',
+        'Commercial space design',
+        'Color scheme and material selection',
+        'Furniture and fixture planning',
+        'Lighting design'
+      ]
     },
     {
       id: 'urban-planning',
-      icon: <FaCity className="text-5xl text-primary" />,
       title: 'Urban Planning',
-      shortDescription: 'Creating sustainable urban environments that enhance quality of life while addressing complex social and environmental challenges.',
-      description: 'Our urban planning services focus on creating vibrant, sustainable, and inclusive communities. We analyze existing urban conditions, identify opportunities for improvement, and develop comprehensive plans that address transportation, housing, public spaces, and infrastructure needs. Through careful planning and stakeholder engagement, we create urban environments that are functional, beautiful, and resilient.',
-      process: [
-        'Urban analysis and site assessment',
-        'Stakeholder consultation',
-        'Master planning and zoning strategies',
-        'Transportation and circulation planning',
-        'Public space design',
-        'Sustainability integration',
-        'Implementation strategy development'
-      ],
-      projects: [
-        'Riverfront Development, Ahmedabad',
-        'Mixed-Use District, Hyderabad',
-        'Sustainable Neighborhood, Pune'
-      ],
-      image: '/assets/images/service-urban.jpg'
+      icon: <FaCity className="text-4xl text-primary" />,
+      description: 'Developing comprehensive urban planning solutions for sustainable and livable communities.',
+      image: '/assets/images/services/urban-planning.jpg',
+      features: [
+        'Master planning',
+        'Zoning and land use planning',
+        'Infrastructure planning',
+        'Community development',
+        'Environmental impact assessment'
+      ]
     },
     {
       id: 'landscape-design',
-      icon: <FaTree className="text-5xl text-primary" />,
       title: 'Landscape Design',
-      shortDescription: 'Crafting outdoor spaces that complement architecture and create harmonious connections between buildings and nature.',
-      description: 'Our landscape design services create outdoor spaces that enhance the built environment and provide sustainable, functional, and beautiful settings for living, working, and recreation. We integrate natural elements, hardscape features, and planting designs to establish connections between architecture and landscape. Our approach emphasizes native plants, water conservation, and creating spaces that evolve beautifully over time.',
-      process: [
-        'Site assessment and analysis',
-        'Conceptual landscape design',
-        'Planting plan development',
-        'Hardscape design',
-        'Water feature and irrigation planning',
-        'Outdoor lighting design',
-        'Implementation oversight'
-      ],
-      projects: [
-        'Urban Park, Mumbai',
-        'Residential Garden, Delhi',
-        'Corporate Campus, Bangalore'
-      ],
-      image: '/assets/images/service-landscape.jpg'
+      icon: <FaTree className="text-4xl text-primary" />,
+      description: 'Creating beautiful and sustainable outdoor spaces that complement your architecture.',
+      image: '/assets/images/services/landscape-design.jpg',
+      features: [
+        'Residential landscaping',
+        'Commercial landscape design',
+        'Sustainable landscaping',
+        'Garden design',
+        'Outdoor space planning'
+      ]
     },
     {
       id: 'project-management',
-      icon: <FaBuilding className="text-5xl text-primary" />,
       title: 'Project Management',
-      shortDescription: 'Comprehensive project management services ensuring your project is delivered on time, within budget, and to the highest standards.',
-      description: 'Our project management services ensure that architectural projects are completed efficiently, on schedule, and within budget while maintaining the highest quality standards. We coordinate between clients, contractors, consultants, and regulatory authorities to streamline the construction process. With careful planning, regular monitoring, and proactive problem-solving, we navigate the complexities of construction to deliver successful project outcomes.',
-      process: [
-        'Project planning and scheduling',
-        'Budget development and management',
-        'Contractor selection and negotiation',
-        'Construction documentation review',
-        'Quality control and site inspection',
-        'Progress reporting and communication',
-        'Project closeout and evaluation'
-      ],
-      projects: [
-        'Luxury Hotel, Goa',
-        'Tech Park, Bangalore',
-        'Residential Complex, Mumbai'
-      ],
-      image: '/assets/images/service-project.jpg'
+      icon: <FaBuilding className="text-4xl text-primary" />,
+      description: 'Overseeing construction projects from conception to completion with expert management.',
+      image: '/assets/images/services/project-management.jpg',
+      features: [
+        'Construction supervision',
+        'Budget management',
+        'Timeline coordination',
+        'Quality control',
+        'Contractor management'
+      ]
     },
     {
       id: '3d-visualization',
-      icon: <FaCubes className="text-5xl text-primary" />,
       title: '3D Visualization',
-      shortDescription: 'Bringing designs to life with photorealistic 3D visualizations that help you experience your space before construction begins.',
-      description: 'Our 3D visualization services provide realistic representations of architectural designs before construction begins. Through detailed renderings, animations, and virtual walkthroughs, clients can better understand spatial relationships, materials, lighting, and the overall design intent. This visual communication tool facilitates better decision-making, refinement of designs, and helps stakeholders envision the completed project with clarity.',
-      process: [
-        '3D model development',
-        'Material and texture application',
-        'Lighting setup and environment creation',
-        'Camera positioning and scene composition',
-        'Rendering and post-processing',
-        'Animation and virtual walkthrough creation',
-        'Presentation preparation'
-      ],
-      projects: [
-        'Residential Tower Visualization, Mumbai',
-        'Museum Interior Renderings, Delhi',
-        'Commercial Complex Flythrough, Chennai'
-      ],
-      image: '/assets/images/service-3d.jpg'
+      icon: <FaCubes className="text-4xl text-primary" />,
+      description: 'Creating detailed 3D visualizations to help you visualize your project before construction.',
+      image: '/assets/images/services/3D-visualization.jpeg',
+      features: [
+        '3D architectural rendering',
+        'Interior visualization',
+        'Exterior visualization',
+        'Virtual walkthroughs',
+        'Animation and presentation'
+      ]
+    },
+    {
+      id: 'architectural-consultation',
+      title: 'Architectural Consultation',
+      icon: <FaPencilRuler className="text-4xl text-primary" />,
+      description: 'Providing expert architectural advice and consultation for your projects.',
+      image: '/assets/images/services/architectural-consultation.jpg',
+      features: [
+        'Design consultation',
+        'Code compliance review',
+        'Site analysis',
+        'Feasibility studies',
+        'Construction documentation review'
+      ]
     },
     {
       id: 'sustainable-design',
-      icon: <FaPalette className="text-5xl text-primary" />,
       title: 'Sustainable Design',
-      shortDescription: 'Environmentally responsible design solutions that minimize ecological footprint while maximizing efficiency and comfort.',
-      description: 'Our sustainable design services integrate environmental considerations into every aspect of the architectural process. We employ passive design strategies, energy-efficient systems, and environmentally friendly materials to create buildings that minimize resource consumption and environmental impact. From LEED certification assistance to biophilic design implementation, we help clients achieve their sustainability goals while creating healthy, comfortable spaces.',
-      process: [
-        'Sustainability goal setting',
-        'Site and climate analysis',
-        'Passive design strategy development',
-        'Energy modeling and system optimization',
-        'Material selection and evaluation',
-        'Green certification guidance',
-        'Post-occupancy evaluation'
-      ],
-      projects: [
-        'Net-Zero Energy Office, Pune',
-        'Green Residential Complex, Bangalore',
-        'Sustainable School Campus, Chennai'
-      ],
-      image: '/assets/images/service-sustainable.jpg'
-    },
-    {
-      id: 'consultation',
-      icon: <FaHandshake className="text-5xl text-primary" />,
-      title: 'Architectural Consultation',
-      shortDescription: 'Expert advice on architectural feasibility, regulations, and design possibilities for your project.',
-      description: "Our architectural consultation services provide expert advice on a wide range of architectural matters. Whether you're exploring the feasibility of a project, navigating complex regulations, or seeking professional input on design options, our experienced architects offer valuable insights to guide your decision-making. These consultations can help clarify project scope, identify challenges and opportunities, and establish a solid foundation for successful project execution.",
-      process: [
-        'Initial client meeting and needs assessment',
-        'Site evaluation and analysis',
-        'Regulatory and code compliance review',
-        'Design feasibility assessment',
-        'Budget and timeline discussions',
-        'Recommendation development',
-        'Documentation and next steps planning'
-      ],
-      projects: [
-        'Heritage Property Assessment, Delhi',
-        'Commercial Redevelopment Consultation, Mumbai',
-        'Residential Renovation Advising, Bangalore'
-      ],
-      image: '/assets/images/service-consultation.jpg'
+      icon: <FaHandshake className="text-4xl text-primary" />,
+      description: 'Implementing eco-friendly and sustainable design solutions for a better future.',
+      image: '/assets/images/services/sustainable-design.jpg',
+      features: [
+        'Green building design',
+        'Energy efficiency planning',
+        'Sustainable materials selection',
+        'Water conservation design',
+        'LEED certification support'
+      ]
     }
   ];
   
@@ -272,7 +230,25 @@ const Services = () => {
   const [activeService, setActiveService] = useState(null);
   
   const toggleService = (id) => {
-    setActiveService(activeService === id ? null : id);
+    if (activeService === id) {
+      setActiveService(null);
+    } else {
+      setActiveService(id);
+      // Wait for state to update and animation to start
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
   };
   
   // Page transition variants
@@ -312,7 +288,7 @@ const Services = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/60 z-10"></div>
           <img 
-            src="/assets/images/services-hero.jpg" 
+            src="/assets/images/backgrounds/services-bg.png" 
             alt="Bhardwaj Architect Services" 
             className="w-full h-full object-cover"
             onError={(e) => {
@@ -353,7 +329,7 @@ const Services = () => {
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-                <p className="text-text-light text-sm mb-4">{service.shortDescription}</p>
+                <p className="text-text-light text-sm mb-4">{service.description}</p>
                 <a 
                   href={`#${service.id}`} 
                   className="inline-flex items-center text-primary hover:text-primary-light font-medium transition-colors duration-300"
@@ -450,9 +426,15 @@ const Services = () => {
                   
                   <motion.div 
                     className="overflow-hidden"
-                    initial={{ height: 0 }}
-                    animate={{ height: activeService === service.id ? 'auto' : 0 }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    initial={false}
+                    animate={{ 
+                      height: activeService === service.id ? 'auto' : 0,
+                      opacity: activeService === service.id ? 1 : 0
+                    }}
+                    transition={{ 
+                      height: { duration: 0.4, ease: "easeInOut" },
+                      opacity: { duration: 0.3, ease: "easeInOut" }
+                    }}
                   >
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 pt-0 border-t border-border">
                       <div>
@@ -460,20 +442,10 @@ const Services = () => {
                         
                         <h4 className="text-lg font-semibold mb-3">Our Process</h4>
                         <ul className="space-y-2 mb-6">
-                          {service.process.map((step, stepIndex) => (
-                            <li key={stepIndex} className="flex items-start">
+                          {service.features.map((feature, featureIndex) => (
+                            <li key={featureIndex} className="flex items-start">
                               <FaCheckCircle className="text-primary mt-1 mr-2" />
-                              <span>{step}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        
-                        <h4 className="text-lg font-semibold mb-3">Featured Projects</h4>
-                        <ul className="space-y-2 mb-6">
-                          {service.projects.map((project, projectIndex) => (
-                            <li key={projectIndex} className="flex items-start">
-                              <div className="w-1 h-1 rounded-full bg-primary mt-2 mr-2"></div>
-                              <span>{project}</span>
+                              <span>{feature}</span>
                             </li>
                           ))}
                         </ul>

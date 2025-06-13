@@ -192,7 +192,7 @@ const PrivacyPolicy = () => {
             </p>
             <p className="mb-8">
               <strong>Email:</strong> privacy@bhardwajarchitect.com<br />
-              <strong>Phone:</strong> +91 98765 43210<br />
+              <strong>Phone:</strong> +91-8700683138<br />
               <strong>Address:</strong> 123 Architecture Avenue, delhi,  India
             </p>
             

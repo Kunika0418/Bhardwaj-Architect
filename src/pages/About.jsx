@@ -44,34 +44,34 @@ const About = () => {
   // Timeline data
   const timeline = [
     {
-      year: "2008",
-      title: "Foundation",
-      description: "Bhardwaj Architect was founded with a mission to create exceptional architectural experiences."
+      year: "Vision",
+      title: "Our Beginning",
+      description: "Started with a passion for creating architectural designs that blend functionality with aesthetic appeal, focusing on client-centered solutions."
     },
     {
-      year: "2012",
-      title: "First Major Project",
-      description: "Completed the award-winning Cultural Center in Jaipur, establishing our reputation for innovative design."
+      year: "Growth",
+      title: "Building Foundations",
+      description: "Established strong relationships with clients and contractors while developing our signature approach to residential and commercial architecture."
     },
     {
-      year: "2015",
-      title: "Expansion",
-      description: "Expanded our team and opened a second office in Mumbai to better serve our growing client base."
+      year: "Innovation",
+      title: "Design Evolution",
+      description: "Integrated modern design technologies and sustainable practices to create more efficient and environmentally conscious architectural solutions."
     },
     {
-      year: "2018",
-      title: "International Recognition",
-      description: "Received international acclaim with our first global award for sustainable architectural design."
+      year: "Recognition",
+      title: "Industry Acknowledgment",
+      description: "Gained recognition in the architectural community for our innovative designs and commitment to quality craftsmanship."
     },
     {
-      year: "2021",
-      title: "Innovation Hub",
-      description: "Launched our innovation lab focused on sustainable building technologies and smart architecture."
+      year: "Expansion",
+      title: "Growing Horizons",
+      description: "Expanded our services to include interior design, landscape architecture, and comprehensive project management solutions."
     },
     {
-      year: "Present",
-      title: "Continued Excellence",
-      description: "Continuing our journey of creating architectural masterpieces that transform spaces and lives."
+      year: "Future",
+      title: "Continuing Forward",
+      description: "Committed to pushing boundaries in architectural design while maintaining our core values of excellence, sustainability, and client satisfaction."
     }
   ];
   
@@ -173,6 +173,7 @@ const About = () => {
       animate="animate"
       exit="exit"
       variants={pageVariants}
+      className="min-h-screen"
     >
       <Helmet>
         <title>About Us | Bhardwaj Architect</title>
@@ -184,7 +185,7 @@ const About = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/60 z-10"></div>
           <img 
-            src="/assets/images/about-hero.jpg" 
+            src="/assets/images/backgrounds/about-bg.png" 
             alt="About Bhardwaj Architect" 
             className="w-full h-full object-cover"
             onError={(e) => {
@@ -196,14 +197,14 @@ const About = () => {
         <div className="container relative z-20 mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About Us</h1>
           <p className="text-lg text-gray-200 max-w-2xl mx-auto">
-            Excellence in architectural design since 2008
+            Excellence in architectural design since 2017
           </p>
         </div>
       </div>
       
       {/* Our Story Section */}
-      <AnimatedSection className="section bg-bg" animation="fade-up">
-        <div className="container mx-auto">
+      <AnimatedSection className="section bg-bg py-16" animation="fade-up">
+        <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <SectionHeading
@@ -214,20 +215,16 @@ const About = () => {
               
               <div className="space-y-4 mt-6">
                 <p className="text-text-light">
-                  {/* Founded in 2008 by Vikram Bhardwaj, our firm began with a vision to create architectural designs that are not just aesthetically pleasing but also functional, sustainable, and meaningful. */}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae est doloribus praesentium aspernatur vel nihil dolorem nobis assumenda, beatae eos ex asperiores quidem temporibus?
+                   Founded in 2017, our firm began with a vision to create architectural designs that are not just aesthetically pleasing but also functional, sustainable, and meaningful.
                 </p>
                 <p className="text-text-light">
-                  {/* Over the years, we have evolved from a small studio into a comprehensive architecture and design practice, earning a reputation for innovative solutions and exceptional client service. */}
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, in repellat debitis voluptatibus tenetur nemo deleniti esse ipsam sunt temporibus distinctio aspernatur quis maiores magnam praesentium, consequuntur repudiandae, fuga vitae.
+                   Over the years, we have evolved from a small studio into a comprehensive architecture and design practice, earning a reputation for innovative solutions and exceptional client service.
                 </p>
                 <p className="text-text-light">
-                  {/* Today, Bhardwaj Architect stands as a testament to our unwavering commitment to architectural excellence. Our portfolio spans residential, commercial, and public projects, each reflecting our passion for design and attention to detail. */}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem aliquid impedit quae eveniet voluptatum autem aut minus repudiandae nisi eaque magnam suscipit, voluptates unde deleniti aperiam voluptate, dolorem ut odio.
+                 Today, Bhardwaj Architect stands as a testament to our unwavering commitment to architectural excellence. Our portfolio spans residential, commercial, and public projects, each reflecting our passion for design and attention to detail.
                 </p>
                 <p className="text-text-light">
-                  {/* We continue to push boundaries, embracing new technologies and sustainable practices while staying true to our core values of excellence, integrity, and client satisfaction. */}
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam neque doloremque similique. Ipsa, fugiat minima. Veritatis asperiores quisquam natus quod voluptatem itaque illo ut nostrum commodi, tempore, temporibus quo dicta.
+                  We continue to push boundaries, embracing new technologies and sustainable practices while staying true to our core values of excellence, integrity, and client satisfaction.
                 </p>
               </div>
             </div>
@@ -253,16 +250,16 @@ const About = () => {
               </div>
               
               {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-primary opacity-70 z-[-1]"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-primary opacity-70 z-[-1] rounded-full"></div>
+              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-primary opacity-70 -z-10"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 border-2 border-primary opacity-70 -z-10 rounded-full"></div>
             </motion.div>
           </div>
         </div>
       </AnimatedSection>
       
       {/* Our Values Section */}
-      <AnimatedSection className="section bg-bg-secondary" animation="fade-up">
-        <div className="container mx-auto">
+      <AnimatedSection className="section bg-bg-secondary py-16" animation="fade-up">
+        <div className="container mx-auto px-4">
           <SectionHeading
             title="Our Values"
             subtitle="What Drives Us"
@@ -291,8 +288,8 @@ const About = () => {
       </AnimatedSection>
       
       {/* Our Timeline */}
-      <AnimatedSection className="section bg-bg" animation="fade-up">
-        <div className="container mx-auto">
+      <AnimatedSection className="section bg-bg py-16" animation="fade-up">
+        <div className="container mx-auto px-4">
           <SectionHeading
             title="Our Journey"
             subtitle="Company Timeline"
@@ -300,31 +297,46 @@ const About = () => {
             alignment="center"
           />
           
-          <div 
-            ref={timelineRef}
-            className="relative mt-16 border-l-2 border-primary ml-4 md:ml-0 md:mx-auto md:max-w-3xl"
-          >
-            {timeline.map((item, index) => (
-              <div 
-                key={index}
-                className="timeline-item mb-12 md:mb-0 md:clear-both md:w-1/2 md:float-right md:pr-8 md:relative md:pb-16"
-              >
-                <div className="hidden md:block absolute top-0 left-0 md:-left-4 w-8 h-8 bg-primary rounded-full transform -translate-x-1/2 border-4 border-bg"></div>
-                <div className="ml-8 md:ml-0">
-                  <div className="absolute left-0 md:left-auto md:right-full top-0 md:mr-8 block md:hidden w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 border-4 border-bg"></div>
-                  <span className="inline-block py-1 px-2 bg-primary text-white text-sm font-medium rounded mb-2">{item.year}</span>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-text-light">{item.description}</p>
+          <div className="mt-16 max-w-4xl mx-auto">
+            <div 
+              ref={timelineRef}
+              className="relative"
+            >
+              {/* Timeline line */}
+              <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary transform md:-translate-x-1/2"></div>
+              
+              {timeline.map((item, index) => (
+                <div 
+                  key={index}
+                  className={`timeline-item relative flex items-center mb-12 ${
+                    index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                  }`}
+                >
+                  {/* Timeline dot */}
+                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 border-4 border-bg z-10"></div>
+                  
+                  {/* Content */}
+                  <div className={`ml-12 md:ml-0 md:w-1/2 ${
+                    index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8'
+                  }`}>
+                    <div className="bg-bg p-6 rounded-lg shadow-md">
+                      <span className="inline-block py-1 px-3 bg-primary text-white text-sm font-medium rounded-full mb-2">
+                        {item.year}
+                      </span>
+                      <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                      <p className="text-text-light">{item.description}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </AnimatedSection>
       
       {/* Team Section */}
-      <AnimatedSection className="section bg-bg-secondary" animation="fade-up">
-        <div className="container mx-auto">
+      <AnimatedSection className="section bg-bg-secondary py-16" animation="fade-up">
+        <div className="container mx-auto px-4">
           <SectionHeading
             title="Meet Our Team"
             subtitle="The Experts"
@@ -371,8 +383,8 @@ const About = () => {
       </AnimatedSection>
       
       {/* Call To Action */}
-      <AnimatedSection className="section bg-bg" animation="fade-up">
-        <div className="container mx-auto text-center">
+      <AnimatedSection className="section bg-bg py-16" animation="fade-up">
+        <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Team</h2>
           <p className="text-text-light mb-8 max-w-2xl mx-auto">
             We're always looking for talented individuals who share our passion for exceptional architecture and design.

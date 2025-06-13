@@ -133,7 +133,7 @@ const Contact = () => {
   };
   
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     const errors = validateForm();
@@ -143,29 +143,42 @@ const Contact = () => {
       return;
     }
     
-    // Simulate form submission
     setFormSubmitting(true);
     
-    // In a real application, you would send the form data to a server here
-    // Simulating API call with timeout
-    setTimeout(() => {
-      setFormSubmitting(false);
-      setFormSubmitted(true);
-      
-      // Reset form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
+    try {
+      const response = await fetch("https://formspree.io/f/manjovag", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
       });
       
-      // Hide success message after 5 seconds
-      setTimeout(() => {
-        setFormSubmitted(false);
-      }, 5000);
-    }, 1500);
+      if (response.ok) {
+        setFormSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: '',
+          message: ''
+        });
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setFormSubmitted(false);
+        }, 5000);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setFormErrors({
+        submit: 'Failed to send message. Please try again later.'
+      });
+    } finally {
+      setFormSubmitting(false);
+    }
   };
   
   // Page transition variants
@@ -205,7 +218,7 @@ const Contact = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/60 z-10"></div>
           <img 
-            src="/assets/images/contact-hero.jpg" 
+            src="/assets/images/backgrounds/contact-bg.png" 
             alt="Bhardwaj Architect Contact" 
             className="w-full h-full object-cover"
             onError={(e) => {
@@ -223,7 +236,7 @@ const Contact = () => {
       </div>
       
       {/* Contact Information Section */}
-      <AnimatedSection className="section bg-bg" animation="fade-up">
+      <AnimatedSection className="section section-bg contact-bg" animation="fade-up">
         <div className="container mx-auto">
           <SectionHeading
             title="Get In Touch"
@@ -242,9 +255,9 @@ const Contact = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
               <p className="text-text-light">
-                123 Architecture Avenue<br />
-                Delhi,<br />
-                India
+                Bhardwaj Architects<br />
+                Najafgarh, New Delhi, 110043<br />
+               India
               </p>
             </motion.div>
             
@@ -257,8 +270,8 @@ const Contact = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Call Us</h3>
               <p className="text-text-light">
-                <a href="tel:+919876543210" className="hover:text-primary transition-colors">+91 98765 43210</a><br />
-                <a href="tel:+919998887770" className="hover:text-primary transition-colors">+91 99988 87770</a>
+                <a href="tel:+918700683138" className="hover:text-primary transition-colors">+91-8700683138</a><br />
+                <a href="tel:+918700683138" className="hover:text-primary transition-colors">+91-8700683138</a>
               </p>
             </motion.div>
             
@@ -271,8 +284,8 @@ const Contact = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Email Us</h3>
               <p className="text-text-light">
-                <a href="mailto:info@bhardwajarchitect.com" className="hover:text-primary transition-colors">info@bhardwajarchitect.com</a><br />
-                <a href="mailto:careers@bhardwajarchitect.com" className="hover:text-primary transition-colors">careers@bhardwajarchitect.com</a>
+                <a href="mailto:info@bhardwajarchitect.com" className="hover:text-primary transition-colors">info@bhardwajarchitects.in</a><br />
+                
               </p>
             </motion.div>
             
@@ -315,7 +328,7 @@ const Contact = () => {
                 <FaTwitter />
               </motion.a>
               <motion.a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/bhardwaj_architects?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-bg-secondary text-text hover:bg-primary hover:text-white flex items-center justify-center shadow-md transition-colors duration-300"
@@ -323,7 +336,7 @@ const Contact = () => {
               >
                 <FaInstagram />
               </motion.a>
-              <motion.a 
+              {/* <motion.a 
                 href="https://linkedin.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -331,9 +344,9 @@ const Contact = () => {
                 whileHover={{ y: -5 }}
               >
                 <FaLinkedinIn />
-              </motion.a>
+              </motion.a> */}
               <motion.a 
-                href="https://wa.me/919876543210" 
+                href="https://wa.me/91-8700683138" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-bg-secondary text-text hover:bg-primary hover:text-white flex items-center justify-center shadow-md transition-colors duration-300"
@@ -347,7 +360,7 @@ const Contact = () => {
       </AnimatedSection>
       
       {/* Contact Form and Map Section */}
-      <AnimatedSection className="section bg-bg-secondary" animation="fade-up">
+      <AnimatedSection className="section section-bg contact-bg" animation="fade-up">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -370,7 +383,23 @@ const Contact = () => {
                 </motion.div>
               )}
               
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 mt-6">
+              {formErrors.submit && (
+                <motion.div 
+                  className="mb-8 p-4 bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-200 rounded-lg"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <p className="font-medium">Error</p>
+                  <p>{formErrors.submit}</p>
+                </motion.div>
+              )}
+              
+              <form 
+                ref={formRef} 
+                onSubmit={handleSubmit} 
+                className="space-y-6 mt-6"
+              >
                 <div className="form-element">
                   <label htmlFor="name" className="block mb-2 font-medium">
                     Name *
@@ -383,6 +412,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-md bg-bg border ${formErrors.name ? 'border-red-500' : 'border-border'} focus:border-primary focus:outline-none transition-colors`}
                     placeholder="Your name"
+                    required
                   />
                   {formErrors.name && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>
@@ -401,6 +431,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-md bg-bg border ${formErrors.email ? 'border-red-500' : 'border-border'} focus:border-primary focus:outline-none transition-colors`}
                     placeholder="Your email"
+                    required
                   />
                   {formErrors.email && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.email}</p>
@@ -409,7 +440,7 @@ const Contact = () => {
                 
                 <div className="form-element">
                   <label htmlFor="phone" className="block mb-2 font-medium">
-                    Phone (Optional)
+                    Phone
                   </label>
                   <input 
                     type="tel" 
@@ -433,7 +464,8 @@ const Contact = () => {
                     value={formData.subject}
                     onChange={handleInputChange}
                     className={`w-full px-4 py-3 rounded-md bg-bg border ${formErrors.subject ? 'border-red-500' : 'border-border'} focus:border-primary focus:outline-none transition-colors`}
-                    placeholder="Subject of your message"
+                    placeholder="Message subject"
+                    required
                   />
                   {formErrors.subject && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.subject}</p>
@@ -452,6 +484,7 @@ const Contact = () => {
                     rows="5"
                     className={`w-full px-4 py-3 rounded-md bg-bg border ${formErrors.message ? 'border-red-500' : 'border-border'} focus:border-primary focus:outline-none transition-colors`}
                     placeholder="Your message"
+                    required
                   ></textarea>
                   {formErrors.message && (
                     <p className="mt-1 text-sm text-red-500">{formErrors.message}</p>
@@ -492,67 +525,29 @@ const Contact = () => {
                 ref={mapRef}
                 className="w-full h-[400px] mt-6 rounded-lg overflow-hidden shadow-lg"
               >
-                {/* In a real application, you would embed a Google Map or similar here */}
-                {/* For now, we'll use a placeholder image */}
-                <div className="w-full h-full bg-bg relative flex items-center justify-center border border-border overflow-hidden">
-                  <img 
-                    src="/assets/images/map.jpg" 
-                    alt="Bhardwaj Architect Office Location" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const mapPlaceholder = document.createElement('div');
-                      mapPlaceholder.className = 'absolute inset-0 flex flex-col items-center justify-center bg-gray-200 dark:bg-gray-800';
-                      
-                      const mapIcon = document.createElement('div');
-                      mapIcon.className = 'text-5xl mb-4 text-primary';
-                      mapIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>';
-                      
-                      const mapText = document.createElement('div');
-                      mapText.className = 'text-lg font-semibold';
-                      mapText.textContent = 'Bhardwaj Architect';
-                      
-                      const mapAddress = document.createElement('div');
-                      mapAddress.className = 'text-sm text-text-light text-center px-4';
-                      mapAddress.textContent = '123 Architecture Avenue, Mumbai, Maharashtra 400001, India';
-                      
-                      mapPlaceholder.appendChild(mapIcon);
-                      mapPlaceholder.appendChild(mapText);
-                      mapPlaceholder.appendChild(mapAddress);
-                      
-                      e.target.parentElement.appendChild(mapPlaceholder);
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                  
-                  {/* Location Marker Overlay */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <motion.div
-                      className="relative"
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                      <FaMapMarkerAlt className="text-4xl text-primary drop-shadow-lg" />
-                      <motion.div 
-                        className="w-6 h-6 bg-primary/30 rounded-full absolute -bottom-3 -left-1"
-                        animate={{ scale: [1, 2], opacity: [0.5, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
-                      ></motion.div>
-                    </motion.div>
-                  </div>
-                </div>
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3502.598612098206!2d76.974227!3d28.611816!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0f63e47a820f%3A0x9bccd099845f0da1!2sBHARDWAJ%20ARCHITECTS!5e0!3m2!1sen!2sin!4v1749794415931!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen="" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Bhardwaj Architects Location"
+                ></iframe>
               </div>
               
               {/* Address Card */}
               <div className="mt-6 bg-bg p-6 rounded-lg shadow-md border border-border">
                 <h3 className="text-lg font-semibold mb-3">Bhardwaj Architect</h3>
                 <p className="text-text-light mb-4">
-                  123 Architecture Avenue<br />
-                  Delhi<br />
+                  Najafgarh<br />
+                  New Delhi, 110043<br />
                   India
                 </p>
                 <div className="flex space-x-4">
                   <a 
-                    href="https://www.google.com/maps" 
+                    href="https://www.google.com/maps/place/BHARDWAJ+ARCHITECTS/@28.611816,76.974227,15z/data=!4m6!3m5!1s0x390d0f63e47a820f:0x9bccd099845f0da1!8m2!3d28.611816!4d76.974227!16s%2Fg%2F11t1y1q8_8?entry=ttu" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-primary hover:text-primary-light font-medium transition-colors"
@@ -560,7 +555,7 @@ const Contact = () => {
                     Get Directions
                   </a>
                   <a 
-                    href="tel:+919876543210" 
+                    href="tel:+918700683138" 
                     className="text-primary hover:text-primary-light font-medium transition-colors"
                   >
                     Call Us
@@ -598,7 +593,7 @@ const Contact = () => {
             </div>
             
             <div className="bg-bg-secondary p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold mb-2">Do you work on projects outside of Mumbai?</h3>
+              <h3 className="text-lg font-semibold mb-2">Do you work on projects outside of New Delhi?</h3>
               <p className="text-text-light">
                 Yes, we work on projects throughout India and have experience with international projects as well. Our team is equipped to handle remote consultations and site visits as required.
               </p>
@@ -622,10 +617,10 @@ const Contact = () => {
             Contact us today to schedule a consultation and take the first step towards creating exceptional architectural spaces.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button href="tel:+919876543210" variant="primary">
+            <Button href="tel:+918700683138" variant="primary">
               <FaPhoneAlt className="mr-2" /> Call Us Now
             </Button>
-            <Button href="https://wa.me/919876543210" variant="outline">
+            <Button href="https://wa.me/918700683138" variant="outline">
               <FaWhatsapp className="mr-2" /> WhatsApp
             </Button>
           </div>

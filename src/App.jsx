@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
+
+// Scroll to top component
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, [pathname]);
+
+  return null;
+};
 
 // Lazy load pages for better performance
 const Home = React.lazy(() => import('./pages/Home'));
@@ -42,6 +57,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
+        <ScrollToTop />
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow">

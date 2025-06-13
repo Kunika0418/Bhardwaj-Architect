@@ -1,10 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../common/Logo';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaChevronDown } from 'react-icons/fa';
 
 const Footer = () => {
+  const [showMoreServices, setShowMoreServices] = useState(false);
   const currentYear = new Date().getFullYear();
   
   const footerVariants = {
@@ -18,6 +19,34 @@ const Footer = () => {
       },
     },
   };
+
+  const handleNavClick = (e) => {
+    const currentPath = window.location.pathname;
+    const targetPath = e.currentTarget.getAttribute('href').split('#')[0];
+    const targetHash = e.currentTarget.getAttribute('href').split('#')[1];
+    
+    if (currentPath === targetPath) {
+      e.preventDefault();
+      if (targetHash) {
+        const element = document.getElementById(targetHash);
+        if (element) {
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
   
   return (
     <motion.footer 
@@ -28,10 +57,12 @@ const Footer = () => {
       variants={footerVariants}
     >
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <Logo />
+            <div className="dark:opacity-90">
+              <Logo size="default" isScrolled={true} />
+            </div>
             <p className="mt-4 text-text-light">
               Excellence in architectural design and innovation, creating spaces that inspire and endure.
             </p>
@@ -48,7 +79,7 @@ const Footer = () => {
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
                 <FaLinkedin size={20} />
               </a>
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
+              <a href="https://wa.me/+91-8700683138" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
                 <FaWhatsapp size={20} />
               </a>
             </div>
@@ -59,22 +90,58 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-text-light hover:text-primary transition-colors duration-300">Home</Link>
+                <Link 
+                  to="/" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/projects" className="text-text-light hover:text-primary transition-colors duration-300">Projects</Link>
+                <Link 
+                  to="/projects" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Projects
+                </Link>
               </li>
               <li>
-                <Link to="/about" className="text-text-light hover:text-primary transition-colors duration-300">About Us</Link>
+                <Link 
+                  to="/about" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  About Us
+                </Link>
               </li>
               <li>
-                <Link to="/gallery" className="text-text-light hover:text-primary transition-colors duration-300">Gallery</Link>
+                <Link 
+                  to="/gallery" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Gallery
+                </Link>
               </li>
               <li>
-                <Link to="/services" className="text-text-light hover:text-primary transition-colors duration-300">Services</Link>
+                <Link 
+                  to="/services" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Services
+                </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-text-light hover:text-primary transition-colors duration-300">Contact</Link>
+                <Link 
+                  to="/contact" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
@@ -84,22 +151,104 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Our Services</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/services#architectural-design" className="text-text-light hover:text-primary transition-colors duration-300">Architectural Design</Link>
+                <Link 
+                  to="/services#architectural-design" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Architectural Design
+                </Link>
               </li>
               <li>
-                <Link to="/services#interior-design" className="text-text-light hover:text-primary transition-colors duration-300">Interior Design</Link>
+                <Link 
+                  to="/services#interior-design" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Interior Design
+                </Link>
               </li>
               <li>
-                <Link to="/services#urban-planning" className="text-text-light hover:text-primary transition-colors duration-300">Urban Planning</Link>
+                <Link 
+                  to="/services#urban-planning" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Urban Planning
+                </Link>
               </li>
               <li>
-                <Link to="/services#landscape-design" className="text-text-light hover:text-primary transition-colors duration-300">Landscape Design</Link>
+                <Link 
+                  to="/services#landscape-design" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Landscape Design
+                </Link>
               </li>
               <li>
-                <Link to="/services#project-management" className="text-text-light hover:text-primary transition-colors duration-300">Project Management</Link>
+                <Link 
+                  to="/services#project-management" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  Project Management
+                </Link>
               </li>
               <li>
-                <Link to="/services#3d-visualization" className="text-text-light hover:text-primary transition-colors duration-300">3D Visualization</Link>
+                <Link 
+                  to="/services#3d-visualization" 
+                  onClick={handleNavClick}
+                  className="text-text-light hover:text-primary transition-colors duration-300"
+                >
+                  3D Visualization
+                </Link>
+              </li>
+              
+              <AnimatePresence>
+                {showMoreServices && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-3"
+                  >
+                    <li>
+                      <Link 
+                        to="/services#sustainable-design" 
+                        onClick={handleNavClick}
+                        className="text-text-light hover:text-primary transition-colors duration-300"
+                      >
+                        Sustainable Design
+                      </Link>
+                    </li>
+                    <li>
+                      <Link 
+                        to="/services#consultation" 
+                        onClick={handleNavClick}
+                        className="text-text-light hover:text-primary transition-colors duration-300"
+                      >
+                        Architectural Consultation
+                      </Link>
+                    </li>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              
+              <li className="pt-3">
+                <button
+                  onClick={() => setShowMoreServices(!showMoreServices)}
+                  className="text-primary hover:text-primary-light transition-colors duration-300 flex items-center gap-2"
+                >
+                  {showMoreServices ? 'Show Less' : 'See More'}
+                  <motion.span
+                    animate={{ rotate: showMoreServices ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <FaChevronDown size={12} />
+                  </motion.span>
+                </button>
               </li>
             </ul>
           </div>
@@ -114,7 +263,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <FaPhone className="text-primary mr-3" />
-                <a href="tel:+1234567890" className="text-text-light hover:text-primary transition-colors duration-300">+91-8700683138</a>
+                <a href="tel:+91-8700683138" className="text-text-light hover:text-primary transition-colors duration-300">+91-8700683138</a>
               </li>
               <li className="flex items-center">
                 <FaEnvelope className="text-primary mr-3" />
@@ -122,7 +271,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <FaWhatsapp className="text-primary mr-3" />
-                <a href="https://wa.me/1234567890" className="text-text-light hover:text-primary transition-colors duration-300">WhatsApp</a>
+                <a href="https://wa.me/+91-8700683138" className="text-text-light hover:text-primary transition-colors duration-300">WhatsApp</a>
               </li>
             </ul>
           </div>

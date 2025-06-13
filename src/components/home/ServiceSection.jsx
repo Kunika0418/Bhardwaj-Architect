@@ -45,8 +45,23 @@ const services = [
 
 const ServiceSection = () => {
   return (
-    <section className="section" data-scroll-section>
-      <div className="container mx-auto">
+    <section className="section relative min-h-[60vh]" data-scroll-section>
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <img 
+          src="/assets/images/backgrounds/services-bg.png"
+          alt="Services Background"
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            console.error('Error loading image:', e);
+            e.target.parentElement.classList.add('bg-gradient-to-br', 'from-gray-900', 'to-gray-600');
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto relative z-20">
         <SectionHeading
           title="Our Services"
           subtitle="What We Offer"
@@ -58,20 +73,20 @@ const ServiceSection = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className="bg-bg-secondary p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-t-2 border-primary/20 hover:border-primary group"
+              className="bg-white/10 backdrop-blur-md p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="p-4 rounded-full bg-primary/10 inline-block mb-4 group-hover:bg-primary/20 transition-all duration-300">
+              <div className="p-4 rounded-full bg-white/10 inline-block mb-4 group-hover:bg-white/20 transition-all duration-300">
                 {service.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
-              <p className="text-text-light mb-6">{service.description}</p>
+              <h3 className="text-xl font-semibold mb-4 text-white">{service.title}</h3>
+              <p className="text-white/80 mb-6">{service.description}</p>
               <a 
                 href={service.link}
-                className="text-primary hover:text-primary-light font-medium inline-flex items-center transition-colors duration-300"
+                className="text-white hover:text-primary font-medium inline-flex items-center transition-colors duration-300"
               >
                 Learn More
                 <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

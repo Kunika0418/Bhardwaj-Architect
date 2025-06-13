@@ -193,7 +193,7 @@ const Gallery = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/60 z-10"></div>
           <img 
-            src="/assets/images/gallery-hero.jpg" 
+            src="/assets/images/backgrounds/gallery-bg.png" 
             alt="Bhardwaj Architect Gallery" 
             className="w-full h-full object-cover"
             onError={(e) => {
