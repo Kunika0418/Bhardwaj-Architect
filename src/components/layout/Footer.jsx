@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../common/Logo';
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaChevronDown } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaChevronDown } from 'react-icons/fa';
 
 const Footer = () => {
   const [showMoreServices, setShowMoreServices] = useState(false);
@@ -70,16 +70,20 @@ const Footer = () => {
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
                 <FaFacebook size={20} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
-                <FaTwitter size={20} />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
+              <a 
+                href="https://www.instagram.com/bhardwaj_architects?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-text-light hover:text-primary transition-colors duration-300"
+              >
                 <FaInstagram size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
-                <FaLinkedin size={20} />
-              </a>
-              <a href="https://wa.me/+91-8700683138" target="_blank" rel="noopener noreferrer" className="text-text-light hover:text-primary transition-colors duration-300">
+              <a 
+                href="https://wa.me/918700683138" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-text-light hover:text-primary transition-colors duration-300"
+              >
                 <FaWhatsapp size={20} />
               </a>
             </div>
@@ -271,7 +275,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <FaWhatsapp className="text-primary mr-3" />
-                <a href="https://wa.me/+91-8700683138" className="text-text-light hover:text-primary transition-colors duration-300">WhatsApp</a>
+                <a href="https://wa.me/918700683138" className="text-text-light hover:text-primary transition-colors duration-300">WhatsApp</a>
               </li>
             </ul>
           </div>
@@ -281,7 +285,7 @@ const Footer = () => {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-text-light text-sm">
-              &copy; {currentYear} Bhardwaj Architect. All rights reserved.
+              &copy; 2017 Bhardwaj Architect. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0 space-x-4">
               <Link to="/privacy-policy" className="text-sm text-text-light hover:text-primary transition-colors duration-300">Privacy Policy</Link>

@@ -16,7 +16,9 @@ import {
   FaInstagram, 
   FaLinkedinIn,
   FaWhatsapp,
-  FaPaperPlane
+  FaPaperPlane,
+  FaHandshake,
+  FaCheckCircle
 } from 'react-icons/fa';
 
 // Register GSAP plugins
@@ -271,7 +273,7 @@ const Contact = () => {
               <h3 className="text-lg font-semibold mb-2">Call Us</h3>
               <p className="text-text-light">
                 <a href="tel:+918700683138" className="hover:text-primary transition-colors">+91-8700683138</a><br />
-                <a href="tel:+918700683138" className="hover:text-primary transition-colors">+91-8700683138</a>
+                {/* <a href="tel:+918700683138" className="hover:text-primary transition-colors">+91-8700683138</a> */}
               </p>
             </motion.div>
             
@@ -294,14 +296,23 @@ const Contact = () => {
               whileHover={{ y: -5 }}
             >
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <FaClock className="text-2xl text-primary" />
+                <FaHandshake className="text-2xl text-primary" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Working Hours</h3>
-              <p className="text-text-light">
-                Monday - Friday: 9:00 AM - 6:00 PM<br />
-                Saturday: 10:00 AM - 4:00 PM<br />
-                Sunday: Closed
-              </p>
+              <h3 className="text-lg font-semibold mb-2">Why Choose Us</h3>
+              <div className="text-text-light space-y-2">
+                <p className="flex items-center justify-center">
+                  <FaCheckCircle className="text-primary mr-2" />
+                  10+ Years Experience
+                </p>
+                <p className="flex items-center justify-center">
+                  <FaCheckCircle className="text-primary mr-2" />
+                  Licensed Professionals
+                </p>
+                <p className="flex items-center justify-center">
+                  <FaCheckCircle className="text-primary mr-2" />
+                  Quality Assurance
+                </p>
+              </div>
             </motion.div>
           </div>
           
@@ -319,15 +330,6 @@ const Contact = () => {
                 <FaFacebookF />
               </motion.a>
               <motion.a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-bg-secondary text-text hover:bg-primary hover:text-white flex items-center justify-center shadow-md transition-colors duration-300"
-                whileHover={{ y: -5 }}
-              >
-                <FaTwitter />
-              </motion.a>
-              <motion.a 
                 href="https://www.instagram.com/bhardwaj_architects?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
@@ -336,17 +338,8 @@ const Contact = () => {
               >
                 <FaInstagram />
               </motion.a>
-              {/* <motion.a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-bg-secondary text-text hover:bg-primary hover:text-white flex items-center justify-center shadow-md transition-colors duration-300"
-                whileHover={{ y: -5 }}
-              >
-                <FaLinkedinIn />
-              </motion.a> */}
               <motion.a 
-                href="https://wa.me/91-8700683138" 
+                href="https://wa.me/918700683138" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-bg-secondary text-text hover:bg-primary hover:text-white flex items-center justify-center shadow-md transition-colors duration-300"
